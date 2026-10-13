@@ -3,20 +3,23 @@ let trs = document.querySelectorAll("tr");
 let tds = document.querySelectorAll("td");
 let winner = document.getElementById("winnerP");
 let gameOver = false;
+let turnP = document.getElementById("turn");
+let resetBtn = document.getElementById("resetBoard");
 let boardVals = [
     [0,0,0,0,0,0,0,0,0]
 ];
 
 let possWins = [
-    [1,2,3],
+    [0,1,2],
+    [0,4,8],
+    [0,3,6],
     [1,4,7],
-    [1,5,9],
+    [2,4,6],
     [2,5,8],
-    [3,6,9],
-    [4,5,6],
-    [7,8,9]
+    [3,4,5],
+    [6,7,8]
 ];
-
+let Xboxes = [];
 let turn = "X";
 tds.forEach((td, idx) => {
     td.addEventListener("click", function(event){
@@ -26,9 +29,11 @@ tds.forEach((td, idx) => {
                     td.textContent = "X";
                     Xboxes.push(idx + 1);
                     turn = "O";
+                    turnP.textContent = "turn: " + turn;
                 } else {
                     td.textContent = "O";
                     turn = "X";
+                    turnP.textContent = "turn: " + turn;
                 }
             } else {
 
@@ -40,6 +45,7 @@ tds.forEach((td, idx) => {
     });
 });
 let winnerRow;
+
 function checkForWin(theBoard) {
     let board = [];
     for (b=0;b<tds.length; b++) {
@@ -47,9 +53,24 @@ function checkForWin(theBoard) {
     }
     for (const pattern of possWins) {
         const [a,b,c] = pattern;
-        
         if (board[a] !== "" && board[a] === board[b] && board[b] === board[c]){
             gameOver = true; 
-        }
+            winner.textContent = "winner: " + tds[pattern[0]].textContent;
+            for (w=0; w<pattern.length; w++) {
+                tds[pattern[w]].classList.add("winnerBlock");
+            }
+        } 
     }
 }
+resetBtn.addEventListener("click", function() {
+    if (gameOver === true) {
+        for (z=0;z<tds.length;z++) {
+            tds[z].textContent = "";
+            tds[z].classList.remove("winnerBlock");
+        }
+    gameOver = false;
+    winner.textContent = "winner: ";
+    turnP.textContent = "turn: " + turn;
+    }
+    
+});
