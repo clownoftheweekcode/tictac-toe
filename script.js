@@ -38,11 +38,12 @@ tds.forEach((td, idx) => {
                     Xboxes.push(idx + 1);
                     turn = "O";
                     turnP.textContent = "turn: " + turn;
-                    td.style.color = "blue";
+                    td.style.color = "red";
                 } else {
                     td.textContent = "O";
                     turn = "X";
                     turnP.textContent = "turn: " + turn;
+                    td.style.color = "blue";
                 }
                 turnsUsed += 1;
             } else {
