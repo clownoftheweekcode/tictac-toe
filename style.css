@@ -9,3 +9,7 @@ td {
 .winnerBlock {
     background-color:yellow;
 }
+#xAmountOfWins, #oAmountOfWins {
+    display:inline-block;
+    margin:5px;
+}
