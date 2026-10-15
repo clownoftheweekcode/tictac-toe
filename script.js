@@ -26,76 +26,95 @@ let possWins = [
     [3,4,5],
     [6,7,8]
 ];
-let turnsUsed = 0;
-let Xboxes = [];
-let turn = "X";
-tds.forEach((td, idx) => {
-    td.addEventListener("click", function(event){
-        if (gameOver === false) {
-            if (td.textContent === "") {
-                if (turn === "X") {
-                    td.textContent = "X";
-                    Xboxes.push(idx + 1);
-                    turn = "O";
-                    turnP.textContent = "turn: " + turn;
-                    td.style.color = "red";
-                } else {
-                    td.textContent = "O";
-                    turn = "X";
-                    turnP.textContent = "turn: " + turn;
-                    td.style.color = "blue";
+
+let modePlayBtn = document.getElementById("selectModePlay");
+let modeSel = document.getElementById("modeSel");
+let modeSelectScreen = document.getElementById("modeSelect");
+modePlayBtn.addEventListener("click", function() {
+    if (modeSel.value === "tictactoe") {
+        tictactoe();
+    } else {
+        notakto();
+    }
+    modeSelectScreen.style.display = "none";
+});
+
+function tictactoe() {
+        let turnsUsed = 0;
+        let Xboxes = [];
+        let turn = "X";
+        tds.forEach((td, idx) => {
+            td.addEventListener("click", function(event){
+                if (gameOver === false) {
+                    if (td.textContent === "") {
+                        if (turn === "X") {
+                            td.textContent = "X";
+                            Xboxes.push(idx + 1);
+                            turn = "O";
+                            turnP.textContent = "turn: " + turn;
+                            td.style.color = "red";
+                        } else {
+                            td.textContent = "O";
+                            turn = "X";
+                            turnP.textContent = "turn: " + turn;
+                            td.style.color = "blue";
+                        }
+                        turnsUsed += 1;
+                    } else {
+
+                    }  
+                } else if (gameOver === true) {
+                    console.log("game over");
                 }
-                turnsUsed += 1;
-            } else {
+                checkForWin();
+            });
+        });
+        let winnerRow;
 
-            }  
-        } else if (gameOver === true) {
-            console.log("game over");
+        function checkForWin(theBoard) {
+            if (turnsUsed === 9 && gameOver === false) {
+                gameOver = true;
+                winner.textContent = "winner: tie";
+            }
+            let board = [];
+            for (b=0;b<tds.length; b++) {
+                board.push(tds[b].textContent);
+            }
+            for (const pattern of possWins) {
+                const [a,b,c] = pattern;
+                if (board[a] !== "" && board[a] === board[b] && board[b] === board[c]){
+                    gameOver = true; 
+                    winner.textContent = "winner: " + tds[pattern[0]].textContent;
+                    if (tds[pattern[0]].textContent === "O") {
+                        oWins += 1;
+                    } else {
+                        xWins += 1;
+                    }
+                    for (w=0; w<pattern.length; w++) {
+                        tds[pattern[w]].classList.add("winnerBlock");
+                    }
+                } 
+            }
+            XnumsOfWins.textContent = "X wins: " + xWins;
+        OnumsOfWins.textContent = "O wins: " + oWins;
         }
-        checkForWin();
-    });
-});
-let winnerRow;
+        resetBtn.addEventListener("click", function() {
+            if (gameOver === true) {
+                for (z=0;z<tds.length;z++) {
+                    tds[z].textContent = "";
+                    tds[z].classList.remove("winnerBlock");
+                    tds[z].color = "black";
+                }
+            gameOver = false;
+            winner.textContent = "winner: ";
+            turnP.textContent = "turn: " + turn;
+            turnsUsed = 0;
 
-function checkForWin(theBoard) {
-    if (turnsUsed === 9 && gameOver === false) {
-        gameOver = true;
-        winner.textContent = "winner: tie";
-    }
-    let board = [];
-    for (b=0;b<tds.length; b++) {
-        board.push(tds[b].textContent);
-    }
-    for (const pattern of possWins) {
-        const [a,b,c] = pattern;
-        if (board[a] !== "" && board[a] === board[b] && board[b] === board[c]){
-            gameOver = true; 
-            winner.textContent = "winner: " + tds[pattern[0]].textContent;
-            if (tds[pattern[0]].textContent === "O") {
-                oWins += 1;
-            } else {
-                xWins += 1;
             }
-            for (w=0; w<pattern.length; w++) {
-                tds[pattern[w]].classList.add("winnerBlock");
-            }
-        } 
-    }
-    XnumsOfWins.textContent = "X wins: " + xWins;
-OnumsOfWins.textContent = "O wins: " + oWins;
+            
+        });
 }
-resetBtn.addEventListener("click", function() {
-    if (gameOver === true) {
-        for (z=0;z<tds.length;z++) {
-            tds[z].textContent = "";
-            tds[z].classList.remove("winnerBlock");
-            tds[z].color = "black";
-        }
-    gameOver = false;
-    winner.textContent = "winner: ";
-    turnP.textContent = "turn: " + turn;
-    turnsUsed = 0;
 
-    }
+function notakto() {
     
-});
+}
