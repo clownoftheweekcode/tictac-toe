@@ -114,7 +114,44 @@ function tictactoe() {
             
         });
 }
-
+ let turn = "1";
 function notakto() {
-    
+    tds.forEach((td,idx) =>{
+        td.addEventListener("click", function() {
+            if (gameOver === false) {
+                if (td.textContent === "") {
+                    if (turn === "1") {
+                        td.textContent = "X";
+                        turn = "2";
+                    } else {
+                        td.textContent = "X";
+                        turn = "1";
+                    }
+                    turnP.textContent = "turn: " + turn;
+                } else {
+
+                }
+                checkForWinNotakto();
+            }
+        });
+    });
+}
+function checkForWinNotakto() {
+    let board = [];
+    for (b = 0; b<tds.length; b++) {
+        board.push(tds[b].textContent);
+    }
+    for (const pattern of possWins) {
+        const [a,b,c] = pattern;
+        if (board[a] !== "" && board[a] === board[b] && board[b] === board[c]){
+            gameOver = true;
+            winner.textContent = "winner: " + turn;
+            if (turn === "1") {
+                
+            }
+            for (w=0;w<pattern.length; w++) {
+                tds[pattern[w]].classList.add("winnerBlock");
+            }   
+        }
+    }
 }
