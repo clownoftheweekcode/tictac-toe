@@ -116,6 +116,8 @@ function tictactoe() {
 }
  let turn = "1";
 function notakto() {
+    XnumsOfWins.textContent = "player 1 wins: " + xWins;
+        OnumsOfWins.textContent = "player 2 wins: " + oWins;
     tds.forEach((td,idx) =>{
         td.addEventListener("click", function() {
             if (gameOver === false) {
@@ -147,11 +149,30 @@ function checkForWinNotakto() {
             gameOver = true;
             winner.textContent = "winner: " + turn;
             if (turn === "1") {
-                
+                xWins +=1;
+                XnumsOfWins.textContent = "player 1 wins: " + xWins;
+            } else {
+                oWins += 1;
+                OnumsOfWins.textContent = "player 2 wins: " + oWins;
             }
             for (w=0;w<pattern.length; w++) {
                 tds[pattern[w]].classList.add("winnerBlock");
             }   
         }
-    }
+        }
+    resetBtn.addEventListener("click", function() {
+            if (gameOver === true) {
+                for (z=0;z<tds.length;z++) {
+                    tds[z].textContent = "";
+                    tds[z].classList.remove("winnerBlock");
+                    tds[z].color = "black";
+                }
+            gameOver = false;
+            winner.textContent = "winner: ";
+            turnP.textContent = "turn: " + turn;
+            turnsUsed = 0;
+
+            }
+            
+        });
 }
