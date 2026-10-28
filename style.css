@@ -67,3 +67,12 @@ position:fixed;
     align-items:center;
     flex-direction:column;
 }
+/* #modeSel {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url();
+} */
+ #modeSel {
+    border-radius: 5px;
+ }
