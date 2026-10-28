@@ -2,6 +2,9 @@ tr, td {
     border:black solid 2px;
     
 }
+html {
+    background-color: rgb(206, 206, 248);
+}
 td {
     width:150px;
     height:150px;
@@ -34,10 +37,25 @@ table {
 #turn {
     margin:0px;
     margin-top:5px;
+    display:inline-block;
+}
+#turn {
+    width:73px;
+}
+#winnerP {
+    max-width:110px;
+    width:110px;
+}
+#turn, #winnerP {
+    margin: 0px 10px;
+    padding:2px 5px;
+    padding-right:10px;
+    background-color:blue;
 }
 #winnerP {
     margin:0px;
     margin-bottom:5px;
+    display:inline-block;
 }
 #resetBoard {
     margin:5px;
@@ -58,7 +76,7 @@ table {
 position:fixed;
     top:0;
     left:0;
-    background-color:blue;
+    background-color:rgb(206, 206, 248);
     width:100%;
     height:100vh;
     z-index:9999;

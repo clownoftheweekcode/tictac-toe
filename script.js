@@ -106,7 +106,7 @@ function tictactoe() {
                     tds[z].color = "black";
                 }
             gameOver = false;
-            winner.textContent = "winner: ";
+            winner.textContent = "winner: NA";
             turnP.textContent = "turn: " + turn;
             turnsUsed = 0;
 
@@ -168,7 +168,7 @@ function checkForWinNotakto() {
                     tds[z].color = "black";
                 }
             gameOver = false;
-            winner.textContent = "winner: ";
+            winner.textContent = "winner: NA";
             turnP.textContent = "turn: " + turn;
             turnsUsed = 0;
 
